@@ -9,7 +9,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr scope="row" *ngFor="let cliente of clientes">
+                    <tr scope="row" *ngFor="let cliente of clientesMostrar">
                         <td scope="col" *ngFor="let atrib of atributosCliente">{{cliente[atrib]}}</td>
                         <td scope="col">
                             <button type="button" class="btn btn-primary acoes" data-toggle="tooltip"
@@ -30,19 +30,22 @@
             </table>
         </div>
 
-        <div>
+        <div *ngIf="totalPaginas > 1">
             <nav>
                 <ul class="pagination justify-content-center">
-                    <li class="page-item">
+                    <li class="page-item" (click)="mudaPagina(1)">
                         <a class="page-link" href="#" aria-label="Anterior">
                             <span aria-hidden="true">&laquo;</span>
                             <span class="sr-only">Anterior</span>
                         </a>
                     </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
+                    <li class="page-item" *ngIf="paginaAtual > 1" (click)="mudaPagina(paginaAtual - 1)"><a
+                            class="page-link" href="#">{{paginaAtual - 1}}</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">{{paginaAtual}}</a></li>
+                    <li class="page-item" *ngIf="paginaAtual < totalPaginas" (click)="mudaPagina(paginaAtual + 1)"><a
+                            class="page-link" href="#">{{paginaAtual + 1}}</a></li>
+                    <li class="page-item" (click)="mudaPagina(totalPaginas)">
                         <a class="page-link" href="#" aria-label="Próximo">
                             <span aria-hidden="true">&raquo;</span>
                             <span class="sr-only">Próximo</span>

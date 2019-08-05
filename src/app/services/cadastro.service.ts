@@ -9,7 +9,7 @@ export class ClienteService {
 
         if (Array.isArray(ArrayClientes)) {
             ArrayClientes.forEach(c => {
-                clientes.push(new Cliente(JSON.parse(c)));
+                clientes.push(new Cliente(c));
             });
         }
 
@@ -23,7 +23,6 @@ export class ClienteService {
     private addCliente(cliente: Cliente): Promise<Cliente> {
         return new Promise((sucesso, falha) => {
             let clientes: Cliente[] = this.listarClientes();
-            let clientesJSON: string[] = [];
             let novoId = 0;
 
             if (clientes) {
@@ -38,9 +37,8 @@ export class ClienteService {
 
             cliente.id = novoId + 1;
             clientes.push(cliente);
-            clientes.forEach(c => clientesJSON.push(c.toJSON()));
 
-            localStorage.setItem('clientes', JSON.stringify(clientesJSON));
+            localStorage.setItem('clientes', JSON.stringify(clientes));
 
             sucesso(cliente);
         });

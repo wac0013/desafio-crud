@@ -3,6 +3,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cadastro.service';
 
 declare var $: any;
+const CLIENTES_POR_PAGINA = 2;
 
 @Component({
     selector: 'dc-lista',
@@ -40,7 +41,7 @@ export class ListaComponent implements OnInit {
     }
 
     get totalPaginas(): number {
-        return this.clientes ? Math.ceil(this.clientes.length / 2) || 1 : 1;
+        return this.clientes ? Math.ceil(this.clientes.length / CLIENTES_POR_PAGINA) || 1 : 1;
     }
 
     atualizarLista() {
@@ -88,5 +89,21 @@ export class ListaComponent implements OnInit {
     selecionaClienteExcluir(e) {
         this.clienteSelecionado = e;
         this.excluir = true;
+    }
+
+    get clientesMostrar(): Cliente[] {
+        const self = this;
+
+        let clientes = this.clientes.filter((cliente, i) => {
+            if (i < CLIENTES_POR_PAGINA * self.paginaAtual && i >= CLIENTES_POR_PAGINA * (self.paginaAtual - 1)) {
+                return cliente;
+            }
+        });
+
+        return clientes;
+    }
+
+    mudaPagina(pagina: number) {
+        this.paginaAtual = pagina;
     }
 }

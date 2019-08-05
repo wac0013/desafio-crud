@@ -1,0 +1,9 @@
+<div class="alert alert-warning alert-dismissible fade show"
+    [ngClass]="{'alert-success': tipo === 'sucesso' , 'alert-warning': tipo === 'atencao', 'alert-danger': tipo === 'erro'}"
+    role="alert">
+    <h4 *ngIf="titulo" class="alert-heading">{{titulo}}</h4>
+    <p>{{mensagem}}</p>
+    <button *ngIf="podeFechar" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

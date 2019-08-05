@@ -1,0 +1,95 @@
+<form [formGroup]="form" class="container" (submit)="salvarCliente()">
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" placeholder="Nome" formControlName="nome"
+                [ngClass]="{ 'is-invalid': processando && formAtribNome.errors }" [readonly]="!modoEdicao">
+            <div *ngIf="processando && formAtribNome.errors" class="invalid-feedback">
+                <div *ngIf="formAtribNome.errors.required">Nome é obrigatório</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="cpf">CPF</label>
+            <input type="text" class="form-control" id="cpf" placeholder="   .   .   -  " formControlName="cpf"
+                [ngClass]="{ 'is-invalid': processando && formAtribCPF.errors }" (keydown)="mascaraCPF()" maxlength="14"
+                [readonly]="!modoEdicao">
+            <div *ngIf="processando && formAtribCPF.errors" class="invalid-feedback">
+                <div *ngIf="formAtribCPF.errors.required">CPF é obrigatório</div>
+                <div *ngIf="formAtribCPF.errors.cpfInvalido">CPF inválido</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="telefone">Telefone</label>
+            <input type="text" class="form-control" id="telefone" placeholder="(  )     -    "
+                formControlName="telefone" [ngClass]="{ 'is-invalid': processando && formAtribTelefone.errors }"
+                (keydown)="mascaraTelefone()" maxlength="14" [readonly]="!modoEdicao">
+            <div *ngIf="processando && formAtribTelefone.errors" class="invalid-feedback">
+                <div *ngIf="formAtribTelefone.errors.required">Telefone é obrigatório</div>
+                <div *ngIf="formAtribTelefone.errors.minlength">Número de telefone muito curto</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="dataNascimento">Data de nascimento</label>
+            <input type="text" class="form-control" id="dataNascimento" placeholder="  /  /    "
+                formControlName="dataNascimento"
+                [ngClass]="{ 'is-invalid': processando && formAtribDataNascimento.errors }" (keydown)="mascaraData()"
+                maxlength="10" [readonly]="!modoEdicao">
+            <div *ngIf="processando && formAtribDataNascimento.errors" class="invalid-feedback">
+                <div *ngIf="formAtribDataNascimento.errors.required">Data de nascimento é obrigatório</div>
+                <div *ngIf="formAtribDataNascimento.errors.dataInvalida">Data inválida</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="endereco">Endereço</label>
+            <textarea type="text" class="form-control" id="endereco" rows="2" placeholder="Rua/Avenida/Logradouro"
+                formControlName="endereco" [ngClass]="{ 'is-invalid': processando && formAtribEndereco.errors }"
+                [readonly]="!modoEdicao"></textarea>
+            <div *ngIf="processando && formAtribEndereco.errors" class="invalid-feedback">
+                <div *ngIf="formAtribEndereco.errors.required">Endereço é obrigatório</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="marca">Marca</label>
+            <select type="text" class="form-control" id="marca" placeholder="Selecione uma marca"
+                formControlName="marca" [ngClass]="{ 'is-invalid': processando && formAtribMarca.errors }"
+                (change)="selecionaMarca()">
+                <option [ngValue]="marca" *ngFor="let marca of opcoesMarcas" [disabled]="!modoEdicao">{{marca.nome}}
+                </option>
+            </select>
+            <div *ngIf="processando && formAtribMarca.errors" class="invalid-feedback">
+                <div *ngIf="formAtribMarca.errors.required">Marca é obrigatório</div>
+            </div>
+        </div>
+
+        <div class="form-group col">
+            <label for="modelo">Modelo</label>
+            <select type="text" class="form-control" id="modelo" placeholder="Selecione um modelo"
+                formControlName="modelo" [ngClass]="{ 'is-invalid': processando && formAtribModelo.errors }">
+                <option [ngValue]="modelo" *ngFor="let modelo of opcoesModelos" [disabled]="!modoEdicao">{{modelo.nome}}
+                </option>
+            </select>
+            <div *ngIf="processando && formAtribModelo.errors" class="invalid-feedback">
+                <div *ngIf="formAtribModelo.errors.required">Modelo é obrigatório</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between btn-acoes">
+        <button [ngStyle]="{'visibility': modoEdicao ? 'visible' : 'hidden'}" type="submit"
+            class="btn btn-primary">Salvar</button>
+        <button [ngStyle]="{'visibility': podeEditar && !modoEdicao ? 'visible' : 'hidden'}" class="btn btn-warning"
+            (click)="editarCliente()" type="button">Editar</button>
+        <button [ngStyle]="{'visibility': podeExcluir ? 'visible' : 'hidden'}" class="btn btn-danger"
+            (click)="excluirCliente()" type="button">Excluir</button>
+    </div>
+</form>

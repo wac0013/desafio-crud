@@ -86,3 +86,7 @@
 <dc-confirmacao-modal *ngIf="excluir" [mensagem]="'Realmente deseja excluir o cliente selecionado?'"
     [titulo]="'Excluir'" (ok)="excluirCliente()" (exit)="excluir = false" (cancela)="excluir = false">
 </dc-confirmacao-modal>
+
+<dc-alerta *ngIf="mensagemAlerta" [mensagem]="mensagemAlerta" [tipo]="tipoAlerta" (fechar)="fecharAlerta()">
+
+</dc-alerta>

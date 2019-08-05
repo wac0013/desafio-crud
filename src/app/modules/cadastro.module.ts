@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +25,7 @@ import { AlertaComponent } from '../components/alerta/alerta.component';
     providers: [
         ClienteService
     ],
-    exports: [ListaComponent]
+    exports: [ListaComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CadastroModule { }

@@ -3,7 +3,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { ClienteService } from 'src/app/services/cadastro.service';
 
 declare var $: any;
-const CLIENTES_POR_PAGINA = 2;
+const CLIENTES_POR_PAGINA = 3;
 
 @Component({
     selector: 'dc-lista',
@@ -20,8 +20,10 @@ export class ListaComponent implements OnInit {
     clienteSelecionado: Cliente;
     sucessoExclusao: boolean;
     excluir = false;
+    mensagemAlerta: string;
+    tipoAlerta: string;
 
-    constructor(private clienteService: ClienteService, private zone: NgZone) {
+    constructor(private clienteService: ClienteService) {
         const self = this;
         self.clientes = [];
         self.cadastro = false;
@@ -31,7 +33,7 @@ export class ListaComponent implements OnInit {
         const self = this;
 
         $('#modalEditor').on('hidden.bs.modal', () => {
-            self.zone.run(() => self.cadastro = false);
+            self.cadastro = false;
         });
 
         self.colunasTabela = ['#', 'CPF', 'Nome', 'Veiculo', 'Ações'];
@@ -46,12 +48,17 @@ export class ListaComponent implements OnInit {
 
     atualizarLista() {
         this.clientes = this.clienteService.listarClientes();
+        if (this.totalPaginas > this.paginaAtual) {
+            this.paginaAtual = this.totalPaginas;
+        }
     }
 
     fecharCadastro() {
         $('#modalEditor').modal('hide');
         this.cadastro = false;
         this.atualizarLista();
+        this.tipoAlerta = 'sucesso';
+        this.mensagemAlerta = this.clienteSelecionado ? 'Cliente atualizado com sucesso' : 'Cliente cadastrado com sucesso';
     }
 
     addCliente() {
@@ -82,8 +89,14 @@ export class ListaComponent implements OnInit {
         self.clienteService.removerCliente(self.clienteSelecionado)
             .then(c => {
                 self.atualizarLista();
+                self.tipoAlerta = 'sucesso';
+                self.mensagemAlerta = 'Cliente excluído com sucesso';
             })
-            .catch();
+            .catch(e => {
+                self.tipoAlerta = 'erro';
+                self.mensagemAlerta = 'Falha ao excluir cliente';
+            }
+            );
     }
 
     selecionaClienteExcluir(e) {
@@ -105,5 +118,9 @@ export class ListaComponent implements OnInit {
 
     mudaPagina(pagina: number) {
         this.paginaAtual = pagina;
+    }
+
+    fecharAlerta() {
+        this.mensagemAlerta = null;
     }
 }

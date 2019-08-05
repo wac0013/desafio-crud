@@ -1,4 +1,4 @@
-<div class="alert alert-warning alert-dismissible fade show"
+<div id="alerta" class="alert alert-dismissible fade show"
     [ngClass]="{'alert-success': tipo === 'sucesso' , 'alert-warning': tipo === 'atencao', 'alert-danger': tipo === 'erro'}"
     role="alert">
     <h4 *ngIf="titulo" class="alert-heading">{{titulo}}</h4>

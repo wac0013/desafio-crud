@@ -1,10 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+
+declare var $: any;
 
 @Component({
     selector: 'dc-alerta',
     templateUrl: 'alerta.component.html'
 })
-export class AlertaComponent {
+export class AlertaComponent implements OnInit {
     @Input()
     podeFechar = true;
 
@@ -17,6 +19,17 @@ export class AlertaComponent {
     @Input()
     titulo: string;
 
+    @Output()
+    fechar = new EventEmitter();
+
     constructor() {
+    }
+
+    ngOnInit() {
+        const self = this;
+
+        $('#alerta').on('closed.bs.alert', () => {
+            self.fechar.emit(null);
+        });
     }
 }

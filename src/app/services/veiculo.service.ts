@@ -52,14 +52,3 @@ export class VeiculoService {
         );
     }
 }
-/*
-fetch('https://parallelum.com.br/fipe/api/v1/carros/marcas', {
-    method: 'GET',
-    headers: new Headers({ 'Content-Type': 'application/json' }),
-    mode: 'cors',
-    cache: 'default'
-}).then(response => {
-    return response.json();
-}).then(data => {
-    console.log(data);
-})*/

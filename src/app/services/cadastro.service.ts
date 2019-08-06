@@ -51,7 +51,7 @@ export class ClienteService {
             if (!cliente.id) {
                 self.addCliente(cliente)
                     .then(c => {
-                        sucesso();
+                        sucesso(c);
                     });
 
                 return;
@@ -64,7 +64,7 @@ export class ClienteService {
             if (i >= 0) {
                 clientes[i] = cliente;
                 localStorage.setItem('clientes', JSON.stringify(clientes));
-                sucesso();
+                sucesso(cliente);
             } else {
                 falha(new Error('Cliente não encontrado, não foi possível atualizá-lo!'));
             }

@@ -1,27 +1,97 @@
 # DesafioCrud
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.6.
+Este projeto criado para atender ao requisitos de desafio de construção de um CRUD para cadastro de clientes consumindo a API https://deividfortuna.github.io/fipe/.
 
-## Development server
+Para o desafio foram utilizados o framework Angular versão 8, utilizando seu utilitário de linha de comando para criar o projeto inicial [Angular CLI](https://github.com/angular/angular-cli).
+Também foi utilizado o framework [Bootstrap](https://getbootstrap.com/) na versão 4.3, juntamente com JQuery (requerido pelo Bootstrap) para estilização e componentes. Para ícones foi utilizado a biblioteca do Google [Icons - Material Design](https://material.io/resources/icons/?style=baseline)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Configuração
+O projeto manteve a maior parte das configurações padrões criadas pelo assistente de criação Angular CLI, tendo pequenas modificações como: `"prefix": "dc"` no arquivo __angular.json__ para redefinir a nomeclatura padrão dos selectors dos componentes criados (dc - desafio crud).
 
-## Code scaffolding
+Também foram alteradas algumas regras de lint para Typescript, de forma a se adequar ao projeto.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Estrutura
+```
+root/
+├── dist/
+├─┬ e2e/
+│ └── src/
+├── node_modules/
+└─┬ src/
+  ├─┬ app/
+  │ ├── components/
+  │ │ ├── alerta/
+  │ │ ├── app/
+  │ │ ├── confirmacaoModal/
+  │ │ ├── edita/
+  │ │ └── lista/
+  │ ├── directives/
+  │ ├── models/
+  │ ├── modules/
+  │ ├── services/
+  │ └── utils/
+  ├── assets/
+  └── environments/
+```
 
-## Build
+`root`: diretório raiz do projeto contendo arquivos de configuração como __angular.json, tsconfig.json, .editorconfig, tslint.json, .gitignore, karma.conf.js, package.json__ <br>
+`dist`: arquivos compilados e minificados do build do projeto <br>
+`e2e`: arquivos de testes end-to-end <br>
+`node_modules`: arquivos de instalação das dependências utilizados no projeto <br>
+`src`: diretório raíz dos arquivos a serem "compilados" para construção do projeto <br>
+`app`: diretório para divisão dos arquivos de inicialização com os módulos do projeto <br>
+`components`: diretório onde são armazendos os componentes reutilizáveis do projeto. Componentes: __alerta, app, confirmacaoModal, edita, lista__ <br>
+`directives`: arquivos de directivas utilizados para validações de formulários, tais como validações de CPF e data. <br>
+`models`: arquivos de classes que representão modelos (__Cliente, Marca, Modelo__) <br>
+`modules`: arquivos para definirem módulos do angular <br>
+`services`: arquivos de classe responsável por fornecerem serviços do projeto, tais como __Cadastro de Clientes__ e __Consulta de veículos__ <br>
+`utils`: arquivos de funções gerais e genéricas (utilitários) para reaproveitamento de código, tais como __mascara de CPF__ e __datas__ <br>
+`assets`: diretório para armazenamento de arquivos estaticos e públicos para página web, tais como Imagens, fontes, etcs <br>
+`environments`: arquivos de definição e configuração dos ambientes de desenvolvimento e produção.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Executando o projeto
 
-## Running unit tests
+O projeto pode ser executado diretamente pelo [link](https://wac0013.github.io/desafio-crud/), estando disponível para testes. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Após realizar o clone do repositório, executar o seguinte comando para instalação das dependências.
+```sh
+$ npm install
+```
+ou
+```sh
+$ yarn install
+```
 
-## Running end-to-end tests
+### Construindo o projeto
+```sh
+$ npm run build
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Realizar o deploy
+```sh
+$ npm run deploy
+```
 
-## Further help
+### Realizar o lint do font
+```sh
+$ npm run lint
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Inidiar servidor para modo desenvolvimento
+```sh
+$ npm run start
+```
+
+### Executar testes unitários
+```sh
+$ npm run test
+```
+
+### Executar testes end-to-end
+```sh
+$ npm run e2e
+```
+
+## Sobre o desafio
+
+Tela de CRUD, com listagem, visualização, edição, deleção e cadastro de clientes, poindo validações para cadastro, além de realizar consulta a API pública da tabela fipe para uso de dados de veículos. Utilizando o armazenamento do browser (localStorage) para armazenamento e manipulação dos dados.  

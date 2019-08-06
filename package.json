@@ -7,7 +7,7 @@
     "build": "ng build --prod=true",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
+    "e2e": "ng e2e --port=4300",
     "deploy": "ng build --prod=true --base-href \"/desafio-crud/\" && git subtree push --prefix dist origin gh-pages"
   },
   "private": true,
@@ -37,7 +37,7 @@
     "@angular/language-service": "~8.0.3",
     "@types/bootstrap": "^4.3.1",
     "@types/jasmine": "^3.3.16",
-    "@types/jasminewd2": "~2.0.3",
+    "@types/jasminewd2": "^2.0.6",
     "@types/jquery": "^3.3.30",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",

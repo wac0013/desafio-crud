@@ -15,7 +15,9 @@
       "node_modules/@types"
     ],
     "types": [
-      "jquery"
+      "jquery",
+      "jasmine",
+      "jasminewd2",
     ],
     "lib": [
       "es2018",
